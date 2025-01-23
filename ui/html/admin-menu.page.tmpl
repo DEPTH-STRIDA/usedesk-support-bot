@@ -1,0 +1,81 @@
+{{define "admin-menu"}} 
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Меню админа</title>
+    <!-- tg -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <!-- unitar -->
+    <script src="/static/js/unitar.js?v={{.Version}}"></script>
+    <link rel="stylesheet" href="/static/css/unitar.css?v={{.Version}}" />
+    <!-- js -->
+    <script src="/static/js/admin-menu.js?v={{.Version}}"></script>
+    <!-- css -->
+    <link rel="stylesheet" href="/static/css/admin-menu.css?v={{.Version}}" />
+  </head>
+  <body>
+
+    <!-- Типичный селект -->
+    <!-- <div class="custom-select">
+      <div class="select-selected" id="replace-format">Формат</div>
+      <input
+        type="text"
+        class="select-search"
+        placeholder="Поиск предмета..."
+        style="display: none"
+      />
+      <ul
+        class="select-items"
+        style="display: none"
+        id="drop-list-format"
+      >
+        <li>Формат 1</li>
+        <li>Формат 2</li>
+        <li>Формат 3</li>
+      </ul>
+    </div> -->
+
+    <!-- Контент на всю страницу -->
+    <main>
+      <!-- header -->
+      <section class="header">
+        <div class="container">
+          <h1><span class="bold">Admin</span> menu</h1>
+        </div>
+      </section>
+      <!-- кнопочки -->
+      <!-- :) -->
+      <section class="command-list">
+        <div class="container">
+          <div class="horizontal">
+            <h3>Обновить данные тегов и проблем</h3>
+            <button class="" id="update-teg-problems">Отправить</button>
+          </div>
+
+          
+        </div>
+      </section>
+      <!-- Отступ для консоли -->
+      <div class="space-for-console"></div>
+    </main>
+    <!-- Консоль -->
+    <section class="console">
+      <div class="container">
+        <!-- <h3>Консоль</h3> -->
+        <textarea
+          class="console-area"
+          name="console"
+          id="console"
+          placeholder="Консоль"
+          disabled
+        ></textarea>
+      </div>
+    </section>
+  </body>
+</html>
+
+{{end}} {{template "admin-menu" .}} 

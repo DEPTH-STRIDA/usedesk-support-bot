@@ -1,0 +1,367 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("../css/Roboto.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../font/Roboto-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+* {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  font-weight: 300;
+}
+
+body {
+  background-color: white !important;
+  /* Остальные стили body */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.horizontal {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 9.3vw;
+  width: 88vw;
+}
+
+.horizontal h3 {
+  text-align: start;
+  font-size: 6.3vw;
+}
+
+.vertical {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 9.3vw;
+  width: 88vw;
+}
+
+.vertical h3 {
+  text-align: start;
+  font-size: 6.3vw;
+  width: 100%;
+}
+
+.vertical input,
+.vertical textarea {
+  width: 84vw;
+  max-width: 84vw;
+  min-width: 84vw;
+  border-radius: 4.7vw;
+  margin-top: 3.1vw;
+  padding: 3.5vw 3.5vw;
+  border: none;
+  background-color: #f2f2f2;
+  font-size: 6.3vw;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-container button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  margin-top: 9.3vw;
+  color: white;
+  background-color: #222222;
+  font-weight: 300;
+  font-size: 6.3vw;
+  width: 53vw;
+  height: 16vw;
+  border-radius: 3.1vw;
+  margin-bottom: 6vw;
+}
+
+.header .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 22vw;
+  background-color: #222222;
+  color: white;
+}
+
+.header .container h1 {
+  text-align: center;
+  background-color: #222222;
+  font-size: 6.3vw;
+}
+
+.custom-checkbox {
+  position: relative;
+  display: inline-block;
+  width: 7vw;
+  height: 7vw;
+  margin-left: 4vw;
+}
+
+.custom-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 7vw;
+  height: 7vw;
+  background-color: #fff;
+  border: 0.4vw solid #282828;
+  border-radius: 1vw;
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+  content: "";
+  position: absolute;
+  display: block;
+  left: 2.5vw;
+  top: 0.5vw;
+  width: 2vw;
+  height: 4vw;
+  border: solid #000;
+  border-width: 0 0.5vw 0.5vw 0;
+  transform: rotate(45deg);
+}
+
+.enter-button {
+  cursor: pointer;
+  background-color: var(--first-color);
+  color: var(--second-color);
+  border-radius: 4vw;
+  font-size: 6.4vw;
+  padding: 2.6vw 16vw;
+  margin-top: 8vw;
+}
+
+.custom-select {
+  margin-top: 3.1vw;
+  position: relative;
+  width: 90vw;
+  max-width: 90vw;
+  min-width: 90vw;
+}
+
+.custom-select .select-selected,
+.custom-select .select-search {
+  margin-top: 3.1vw;
+  font-weight: 300;
+  width: 90vw;
+  max-width: 90vw;
+  min-width: 90vw;
+  box-sizing: border-box;
+  font-size: 6.3vw;
+  border: none;
+  border-radius: 4.7vw;
+  background-color: #f2f2f2;
+  padding: 3.5vw 3.5vw;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.custom-select .select-items {
+  position: absolute;
+  width: 100%;
+  max-height: 62.5vw;
+  overflow-y: auto;
+  z-index: 5;
+  top: calc(100% + 1vw);
+  left: 0;
+  border: solid 0.4vw #282828;
+  border-radius: 4.7vw;
+  background-color: #f2f2f2;
+  display: none;
+}
+
+.custom-select .select-items li {
+  font-weight: 300;
+  padding: 3.5vw 3.5vw;
+  cursor: pointer;
+  font-size: 6vw;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.custom-select .select-items li:hover {
+  background-color: #ddd;
+}
+
+.hint-holder {
+  position: relative;
+}
+
+.hint-holder .button-hint {
+  position: absolute;
+  color: #ffffff;
+  background-color: #222222;
+  font-size: 6.3vw;
+  border: none;
+  border-radius: 6vw;
+  width: 7.5vw;
+  font-weight: normal;
+  top: -6vw;
+  right: 2vw;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.hint-holder .button-hint:hover {
+  background-color: #575757;
+}
+
+.dialog {
+  position: fixed;
+  background-color: #222222;
+  color: white;
+  font-size: 4vw;
+  border: none;
+  outline: none;
+  max-width: 80vw;
+  top: 20%;
+  left: 7%;
+  padding: 4vw 4vw;
+  border-radius: 4vw;
+}
+
+.dialog h3 {
+  font-size: 6vw;
+  margin-top: 4.5vw;
+  margin-bottom: 3.5vw;
+}
+
+.dialog .close-modal {
+  position: absolute;
+  right: 2vw;
+  top: 2vw;
+  width: 6vw;
+}
+
+.dialog .close-modal:hover {
+  background-color: #575757;
+  cursor: pointer;
+}
+
+dialog::backdrop {
+  background-color: rgb(0 0 0 /0.4);
+  backdrop-filter: blur(5px);
+}
+
+.dialog {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dialog[open] {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.dialog.animate-in {
+  animation: popIn 0.3s ease forwards;
+}
+
+.dialog.animate-out {
+  animation: popOut 0.3s ease forwards;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes popOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+.dialog-alert {
+  position: fixed;
+  width: 75vw;
+  z-index: 15;
+  left: 8%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  visibility: visible;
+}
+
+.dialog-alert.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.dialog-alert.show {
+  opacity: 1;
+}
+
+.title {
+  font-size: 6vw;
+  color: rgb(62, 255, 62);
+  font-weight: 600;
+}
+
+.error-description {
+  margin-top: 2vw;
+  font-size: 4.5vw;
+  margin-bottom: 2vw;
+}
+
+.loading {
+  position: absolute;
+  bottom: 2vw;
+  background-color: white;
+  width: 0%;
+  height: 1vw;
+  outline: none;
+  border-radius: 3vw;
+  transition: width 0.3s linear;
+}
+
+.empty-space{
+  display: none;
+  width: 85vw;
+  height: 55vh;
+}

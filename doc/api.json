@@ -1,0 +1,30 @@
+{
+  "get-data": {
+    "desc": "Проверяет тг данные пользователя и возвращает в форму данные для заполнения",
+    "url": "/get-data",
+    "method": "GET",
+    "url-query": "json - initData",
+    "response": "json - status, error-desc,sopr,teh,rasp"
+  },
+  "send-data": {
+    "desc": "Отправляет заявку",
+    "url": "/send-data",
+    "method": "POST",
+    "body": "json - initData,name,group-number,is-emergency,departament,ready-problem,custom-problem",
+    "response": "json - status, error-desc"
+  },
+  "admin-menu": {
+    "desc": "Cтраница для админов",
+    "url": "admin-menu",
+    "method": "GET",
+    "url-query": "nil",
+    "response": "render - default"
+  },
+  "admin-command": {
+    "desc": "Адрес для принятия команд от админов",
+    "url": "admin-command",
+    "method": "POST",
+    "body": "json - initData, command",
+    "response": "json - status, desc"
+  }
+}

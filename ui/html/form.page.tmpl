@@ -1,0 +1,240 @@
+{{define "form"}} 
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Форма поддержки</title>
+    <!-- tg -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <!-- unitar -->
+    <script src="/static/js/unitar.js"></script>
+    <link rel="stylesheet" href="/static/css/unitar.css" />
+    <!-- js -->
+    <script src="/static/js/form.js?v={{.Version}}"></script>
+    <!-- css -->
+    <link rel="stylesheet" href="/static/css/form.css?v={{.Version}}" />
+  </head>
+  <body>
+    <!-- alert -->
+    <dialog class="dialog dialog-alert" id="dialog-alert">
+      <p class="title" id="alert-title">ОШИБКА</p>
+      <p class="error-description" id="alert-description">
+        Базовое описание ошибки
+      </p>
+      <div class="loading" id="loading"></div>
+      <img
+        onclick="closeAlert()"
+        src="/static/img/krestik.svg"
+        alt=""
+        class="close-modal"
+      />
+    </dialog>
+
+    <section class="header">
+      <div class="container">
+        <h1>Обращение в<br />поддержку</h1>
+      </div>
+    </section>
+
+    <section class="form">
+      <div class="container">
+        <!-- Срочная ли ваша заявка? -->
+        <div class="horizontal is-emergency">
+          <h3>Срочная ли ваша заявка?</h3>
+          <div class="checkbox-horizontal">
+            <label class="custom-checkbox">
+              <input type="checkbox" name="is-emergency" id="is-emergency" />
+              <span class="checkmark"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- ФИ преподавателя* -->
+        <div class="vertical name">
+          <h3>ФИ преподавателя*</h3>
+          <input
+            placeholder="..."
+            type="text"
+            name="name"
+            id="name"
+            autocomplete="name"
+            value="{{.Name}}"
+          />
+        </div>
+
+        <!-- Где проходит занятие (если идет сейчас) -->
+        <div class="vertical place">
+          <dialog class="dialog" id="dialog-where">
+            <h3>
+              Напишите платформу, на которой занимаетесь. Пример: ЛД ; Google
+              meet (Гугл мит) ; Discord (Дискорд и тд)
+            </h3>
+            <img src="/static/img/krestik.svg" alt="" class="close-modal" />
+          </dialog>
+
+          <h3>Где проходит занятие (если идет сейчас)*</h3>
+          <div class="hint-holder">
+            <button
+              class="hint-where button-hint"
+              data-dialog-id="dialog-where"
+            >
+              ?
+            </button>
+            <input placeholder="..." type="text" name="place" id="place" />
+          </div>
+        </div>
+
+        <!-- Номер группы -->
+        <div class="vertical place">
+          <dialog class="dialog" id="dialog-group-number">
+            <h3>
+              Если вопрос не связан с группой, то ставьте 3 прочерка.<br />Пример:
+              —
+            </h3>
+            <img src="/static/img/krestik.svg" alt="" class="close-modal" />
+          </dialog>
+
+          <h3>Номер группы*</h3>
+          <div class="hint-holder">
+            <button
+              class="hint-where button-hint"
+              data-dialog-id="dialog-group-number"
+            >
+              ?
+            </button>
+            <input
+              placeholder="..."
+              type="text"
+              name="place"
+              id="group-number"
+            />
+          </div>
+        </div>
+
+        <!-- Выбор отдела, чья помощь требуется* -->
+        <div class="vertical teg hint-holder">
+          <dialog class="dialog" id="dialog-teg">
+            <h3>
+              Выберите отдел, который может вам помочь. Если не знаете, кто за
+              что отвечает, тогда ознакомьтесь с инструкцией, которую вам
+              прислал бот
+            </h3>
+            <img src="/static/img/krestik.svg" alt="" class="close-modal" />
+          </dialog>
+
+          <h3>Выбор отдела, чья помощь требуется*</h3>
+          <div class="hint-holder">
+            <button class="hint-where button-hint" data-dialog-id="dialog-teg">
+              ?
+            </button>
+            <div class="custom-select">
+              <div class="select-selected" id="teg">Отдел</div>
+              <input
+                type="text"
+                class="select-search"
+                placeholder="Поиск отдела..."
+                style="display: none"
+                disabled
+              />
+              <ul
+                class="select-items"
+                style="display: none"
+                id="drop-list-format"
+              >
+                {{range $index, $teg := .Tegs}}
+                <li class="teg-{{$index}}">{{.}}</li>
+                {{end}}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Выбор готовой проблемы -->
+        <div class="vertical problem">
+          <dialog class="dialog" id="dialog-problem">
+            <h3>
+              Если не нашли подходящей проблемы, тогда ознакомьтесь с
+              инструкцией, которую вам скидывал бот и выберите нужный отдел
+            </h3>
+            <img src="/static/img/krestik.svg" alt="" class="close-modal" />
+          </dialog>
+          <h3>Выбор проблемы*</h3>
+
+          <div class="hint-holder">
+            <button
+              class="hint-where button-hint"
+              data-dialog-id="dialog-problem"
+            >
+              ?
+            </button>
+
+            {{range $index, $problems := .Problems}}
+            <div class="custom-select">
+              <div class="select-selected" id="problem">Проблема</div>
+              <input
+                type="text"
+                class="select-search"
+                placeholder="Поиск проблемы..."
+                style="display: none"
+              />
+              <ul
+                class="select-items"
+                style="display: none"
+                id="drop-list-format"
+              >
+                {{range $problems}}
+                <li data-teg-index="{{$index}}">{{.}}</li>
+                {{end}}
+              </ul>
+            </div>
+            {{end}}
+          </div>
+        </div>
+
+        <!-- Ваш запрос -->
+        <div class="vertical custom-problem">
+          <dialog class="dialog" id="dialog-custom-problem">
+            <h3>
+              Укажите всю информацию, которая может помочь сервису решить
+              проблему. Пример: если надо связаться с учеником, то напишите имя
+              ученика или если наложение, то напишите какие группы накладываются
+              и тд
+            </h3>
+            <img src="/static/img/krestik.svg" alt="" class="close-modal" />
+          </dialog>
+          <h3>Ваш запрос*</h3>
+
+          <div class="hint-holder">
+            <button
+              class="hint-where button-hint"
+              data-dialog-id="dialog-custom-problem"
+            >
+              ?
+            </button>
+
+            <textarea
+              placeholder="..."
+              name="custom-problem"
+              id="custom-problem"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Кнопка отправить -->
+        <div class="button-container">
+          <button id="send">Отправить</button>
+        </div>
+      </div>
+
+      <div class="empty-space" id="empty-space">
+
+      </div>
+
+    </section>
+  </body>
+</html>
+
+ {{end}} {{template "form" .}}

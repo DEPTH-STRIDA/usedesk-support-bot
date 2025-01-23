@@ -1,0 +1,37 @@
+{
+  "webb-app": {
+    "IP": "",
+    "PORT": "",
+    "token": "token",
+    "id-app": ""
+  },
+
+  "telegram": {
+    "token": "token",
+
+    "admins": [],
+
+    "request-update-pause": 3,
+    "request-callback-update-pause": 1,
+    "message-buffer-size": 100,
+    "callback-buffer-size": 100,
+
+    "bot-tg-chat": -100449385031,
+    "error-topic-id": 3818
+  },
+  "google-sheet": {
+    "sheet-id": "1HL0DrSrbrrwhvHl57z...",
+    "data-list-name": "Готовые-проблемы",
+    "request-update-pause": 3,
+    "data-update-pause-hour": 8,
+    "buffer-size": 300
+  },
+  "db": {
+    "host": "localhost",
+    "port": "5432",
+    "data-base-name": "easycode",
+    "username": "notifications_app",
+    "password": "sgD-sd3-FSd_ds",
+    "sslmode": "disable"
+  }
+}
